@@ -1,4 +1,8 @@
-# huckleberry-ts — project guide for Claude
+# CLAUDE.md
+
+This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
+
+## Overview
 
 TypeScript + Bun client and local MCP server for the Huckleberry childcare app. Read-only in v1. Models the style, packaging, and MCP conventions of [`macos-ts`](https://github.com/evantahler/macos-ts).
 
@@ -73,10 +77,12 @@ To add a feature:
 
 ```bash
 bun install
-bun test               # full suite (mocked)
-bun run lint           # tsc --noEmit + biome check
-bun run format         # biome check --write
-bun run mcp            # run the MCP server against real creds (needs HUCKLEBERRY_EMAIL/PASSWORD)
+bun test                           # full suite (mocked)
+bun test tests/sleep.test.ts       # single test file
+bun test -t "lists sleep"          # filter by test name
+bun run lint                       # tsc --noEmit + biome check
+bun run format                     # biome check --write
+bun run mcp                        # run the MCP server against real creds (needs HUCKLEBERRY_EMAIL/PASSWORD; optional HUCKLEBERRY_TIMEZONE)
 ```
 
 ## Non-obvious gotchas (worth re-reading before edits)
