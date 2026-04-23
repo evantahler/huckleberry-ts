@@ -1,0 +1,53 @@
+{
+  "name": "huckleberry-ts",
+  "version": "0.1.0",
+  "description": "TypeScript client and local MCP server for the Huckleberry childcare app — read sleep, feed, diaper, activity, pump, health, and solids data.",
+  "module": "src/index.ts",
+  "bin": {
+    "huckleberry-mcp": "src/mcp-server.ts"
+  },
+  "type": "module",
+  "license": "MIT",
+  "files": [
+    "src",
+    "README.md",
+    "LICENSE"
+  ],
+  "publishConfig": {
+    "access": "public"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/evantahler/huckleberry-ts.git"
+  },
+  "keywords": [
+    "huckleberry",
+    "childcare",
+    "baby",
+    "sleep",
+    "feeding",
+    "diaper",
+    "firebase",
+    "mcp",
+    "typescript"
+  ],
+  "author": "Evan Tahler",
+  "scripts": {
+    "test": "bun test",
+    "lint": "tsc --noEmit && biome check .",
+    "format": "biome check --write .",
+    "mcp": "bun run src/mcp-server.ts"
+  },
+  "devDependencies": {
+    "@biomejs/biome": "^2.4.11",
+    "@types/bun": "latest"
+  },
+  "peerDependencies": {
+    "typescript": "^5"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.29.0",
+    "firebase": "^11.0.0",
+    "zod": "^3.23.0"
+  }
+}
