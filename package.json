@@ -1,6 +1,6 @@
 {
   "name": "huckleberry-ts",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "TypeScript client and local MCP server for the Huckleberry childcare app — read sleep, feed, diaper, activity, pump, health, and solids data.",
   "module": "src/index.ts",
   "bin": {
