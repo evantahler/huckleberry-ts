@@ -6,14 +6,18 @@ Read-only. No writes in v1. Ports the reverse-engineered API surface from [`py-h
 
 ## Requirements
 
-- [Bun](https://bun.sh/) 1.3+
+- [Bun](https://bun.sh/) 1.3+ — the package ships TypeScript source with no build step, so it must be run on Bun (not Node).
 - A Huckleberry account (email + password)
 
 ## Install
 
+Add to a project:
+
 ```bash
 bun add huckleberry-ts
 ```
+
+Or run the MCP server with no install via `bunx` (see [MCP server](#mcp-server) below).
 
 ## Library usage
 
@@ -53,16 +57,18 @@ await client.close();
 
 ## MCP server
 
-`huckleberry-ts` ships with a local MCP server at `src/mcp-server.ts` (bin entry: `huckleberry-mcp`). It wraps the library as a set of read-only MCP tools an AI agent can call.
+`huckleberry-ts` ships a local MCP server as the `huckleberry-mcp` bin. It wraps the library as a set of read-only MCP tools an AI agent can call.
 
 ### Claude Desktop / Claude Code config
+
+The recommended setup uses `bunx` so there's nothing to install or keep up to date:
 
 ```json
 {
   "mcpServers": {
     "huckleberry": {
-      "command": "bun",
-      "args": ["run", "/absolute/path/to/huckleberry-ts/src/mcp-server.ts"],
+      "command": "bunx",
+      "args": ["huckleberry-ts"],
       "env": {
         "HUCKLEBERRY_EMAIL": "you@example.com",
         "HUCKLEBERRY_PASSWORD": "your-password",
@@ -72,6 +78,23 @@ await client.close();
   }
 }
 ```
+
+If you've added `huckleberry-ts` as a dependency in a project, you can instead point at the installed bin:
+
+```json
+{
+  "mcpServers": {
+    "huckleberry": {
+      "command": "bun",
+      "args": ["run", "huckleberry-mcp"],
+      "cwd": "/absolute/path/to/your/project",
+      "env": { "HUCKLEBERRY_EMAIL": "...", "HUCKLEBERRY_PASSWORD": "...", "HUCKLEBERRY_TIMEZONE": "..." }
+    }
+  }
+}
+```
+
+> **Note:** the command must be `bun`/`bunx` — not `node`/`npx`. The package is published as raw TypeScript, which Bun executes directly.
 
 ### Tools
 
